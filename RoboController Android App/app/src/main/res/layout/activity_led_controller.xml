@@ -52,7 +52,7 @@
         android:layout_height="48dp"
         android:layout_margin="12dp"
         android:id="@+id/disconnectImageViewButton"
-        android:background="@drawable/ic_remove_circle_black_24dp"
+        android:background="@drawable/disconnect_final"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"/>
 
@@ -64,7 +64,19 @@
         android:layout_alignParentBottom="true"
         android:background="@drawable/ic_robot_final"/>
 
-    <android.support.v7.widget.SwitchCompat
+    <ToggleButton
+        android:id="@+id/eyesToggleButton"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:checked="false"
+        android:background="@drawable/toggle_selector"
+        android:textOff=""
+        android:textOn=""
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="15dp"/>
+
+    <!--android.support.v7.widget.SwitchCompat
         android:id="@+id/eyesToggleSwitch"
         android:theme="@style/switch_style"
         android:checked="false"
@@ -72,6 +84,6 @@
         android:layout_marginBottom="10dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true" />
+        android:layout_alignParentBottom="true" /-->
 
 </RelativeLayout>

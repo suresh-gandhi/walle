@@ -17,6 +17,7 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import java.io.IOException;
 import java.util.UUID;
@@ -24,7 +25,8 @@ import java.util.UUID;
 public class LedControllerActivity extends AppCompatActivity {
 
     private SeekBar leftArmSeekbar, rightArmSeekbar, neckSeekbar;
-    private SwitchCompat switchCompat;
+    // private SwitchCompat switchCompat;
+    private ToggleButton toggleButton;
     private ImageView disconnectImageViewButton;
 
     private String address = null;
@@ -52,7 +54,7 @@ public class LedControllerActivity extends AppCompatActivity {
         rightArmSeekbar = findViewById(R.id.rightArmSeekbar);
         neckSeekbar = findViewById(R.id.neckSeekbar);
 
-        switchCompat = findViewById(R.id.eyesToggleSwitch);
+        toggleButton = findViewById(R.id.eyesToggleButton);
 
         disconnectImageViewButton = findViewById(R.id.disconnectImageViewButton);
 
@@ -65,7 +67,7 @@ public class LedControllerActivity extends AppCompatActivity {
                         bluetoothSocket.getOutputStream().write(leftArmSeekbarMessage.getBytes());
                     }
                     catch (IOException e){
-
+                        msg("Error");
                     }
                 }
             }
@@ -90,7 +92,7 @@ public class LedControllerActivity extends AppCompatActivity {
                         bluetoothSocket.getOutputStream().write(rightArmSeekbarMessage.getBytes());
                     }
                     catch (IOException e){
-
+                        msg("Error");
                     }
                 }
             }
@@ -115,7 +117,7 @@ public class LedControllerActivity extends AppCompatActivity {
                         bluetoothSocket.getOutputStream().write(neckSeekbarMessage.getBytes());
                     }
                     catch (IOException e){
-
+                        msg("Error");
                     }
                 }
             }
@@ -138,13 +140,15 @@ public class LedControllerActivity extends AppCompatActivity {
             }
         });
 
-        switchCompat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
+                    // Toast.makeText(LedControllerActivity.this, "Is Checked", Toast.LENGTH_SHORT).show();
                     turnOnLed();
                 }
                 else{
+                    // Toast.makeText(LedControllerActivity.this, "Is Not Checked", Toast.LENGTH_SHORT).show();
                     turnOffLed();
                 }
             }
@@ -161,6 +165,7 @@ public class LedControllerActivity extends AppCompatActivity {
         {
             try {
                 bluetoothSocket.close(); //close connection
+                Toast.makeText(this, "Disconnected", Toast.LENGTH_SHORT).show();
             }
             catch (IOException e) {
                 msg("Error");
@@ -174,6 +179,7 @@ public class LedControllerActivity extends AppCompatActivity {
         {
             try {
                 bluetoothSocket.getOutputStream().write("TF".toString().getBytes());
+                Toast.makeText(this, "Turned Off", Toast.LENGTH_SHORT).show();
             }
             catch (IOException e) {
                 msg("Error");
@@ -185,6 +191,7 @@ public class LedControllerActivity extends AppCompatActivity {
         if (bluetoothSocket != null) {
             try {
                 bluetoothSocket.getOutputStream().write("TO".toString().getBytes());
+                Toast.makeText(this, "Turned On", Toast.LENGTH_SHORT).show();
             }
             catch (IOException e) {
                 msg("Error");
